@@ -13,20 +13,23 @@ print ("Let's play hangman!")
 turn = int(input("How many guesses allowed?		"))
 score = 0
 
-random_index = randint(0,(len(word)-1))
-w = word[random_index]
-hidden= list("x" * len(w))
-
-print ("")
-print ("".join(hidden))
-print ("hint: " + hint[random_index])
-print ("")
 
 while turn > 0:
 
-	c = str.lower(input("What character to guess?   "))
-	if len(c) == 1:
-		if c.isalpha() == True:
+	random_index = randint(0,(len(word)-1))
+	w = word[random_index]
+	hidden= list("x" * len(w))
+
+	print ("")
+	print ("".join(hidden))
+	print ("hint: " + hint[random_index])
+	print ("")
+
+	
+	while True:
+		c = str.lower(input("What character to guess?   "))
+		if len(c) == 1:
+			if c.isalpha() == True:
 				character_index = w.find(c)
 				if character_index != -1:
 					while character_index != -1:
@@ -35,30 +38,36 @@ while turn > 0:
 						character_index = w.find(c, character_index + 1)
 				else:
 					turn -= 1
+			else:
+				print ("Only alphabetic character allowed.")
+				print ("")
+			
+		elif c == w:
+			score += 1
+			print ("You guessed it! Correct!")
+			print ("Current score is %i" % score)
+			print ("________")
+			break
 
 		else:
-			print ("Only alphabetic character allowed.")
+			print ("You have entered multiple characters, only enter one character.")
 			print ("")
-	else:
-		print ("You have entered multiple characters, only enter one character.")
+
+		print ("")
+		print ("".join(hidden))
+		print ("Turns left: %i" % turn)
 		print ("")
 
-	print ("")
-	print ("".join(hidden))
-	print ("Turns left: %s" % turn)
-	print ("")
+		if "".join(hidden) == w:
+			score += 1
+			print ("You win!")
+			print ("Current score is %i" % score)
+			print ("________")
+			break
 
-	if "".join(hidden) == w:
-		score += 1
-		print ("You win!")
-		print ("Current score is %s" % score)
-		break
-
-		#repeat game?
 
 	if turn == 0:
 		print ("You lose.")
 		break
 
-
-#problems :  option to play another game?
+#problems :  wrong guess no penalty on turn?
