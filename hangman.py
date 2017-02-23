@@ -37,7 +37,6 @@ while turn > 0:
 	print ("input 123 to reveal a letter, turn deducts by one")
 	print ("")
 
-	
 	while "".join(hidden) != w and turn > 0:
 		c = str(input("What character to guess?   "))
 		if len(c) == 1:
@@ -108,5 +107,6 @@ if turn == 0:
 	print ("Top three scorers are ... " + str(highscore_list[:3]))
 	print ("Good Game!")
 
-
-
+  
+  
+  
